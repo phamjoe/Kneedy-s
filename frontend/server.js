@@ -5,6 +5,7 @@ const PORT = process.env.PORT || 4040;
 const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
+const sass = require("node-sass-middleware");
 const morgan = require('morgan');
 //const knexLogger  = require('knex-logger');
 
@@ -16,17 +17,34 @@ app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
-// Mount all resource routes
-app.use("/user", usersRoutes);
-app.use("/products", productRoutes);
+app.use("/styles", sass({
+  src: __dirname + "/styles",
+  dest: __dirname + "/public/styles",
+  debug: true,
+  outputStyle: 'expanded'
+}));
+app.use(express.static("public"));
+
 // Home page
 app.get("/", (req, res) => {
-  res.json({
-    status: 200,
-    ready: true
-  });
+  res.render("index");
+});
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+app.get("/cart", (req, res) => {
+  res.render("cart");
+});
+app.get("/checkout", (req, res) => {
+  res.render("checkout");
+});
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
+app.get("/order", (req, res) => {
+  res.render("order");
 });
 
 app.listen(PORT, () => {
-  console.log("Example app listening on port " + PORT);
+  console.log("Front End Server listening on port " + PORT);
 });
