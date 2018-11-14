@@ -56,8 +56,8 @@ app.get("/checkout", (req, res) => {
 app.get("/contact", (req, res) => {
   res.render("contact");
 });
-app.get("/shop", (req, res) => {
-  res.render("shop");
+app.get("/order", (req, res) => {
+  res.render("order");
 });
 
 app.listen(PORT, () => {
