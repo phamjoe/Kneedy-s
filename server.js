@@ -43,6 +43,21 @@ app.use("/products", productRoutes);
 app.get("/", (req, res) => {
   res.render("index");
 });
+app.get("/about", (req, res) => {
+  res.render("about");
+});
+app.get("/cart", (req, res) => {
+  res.render("cart");
+});
+app.get("/checkout", (req, res) => {
+  res.render("checkout");
+});
+app.get("/contact", (req, res) => {
+  res.render("contact");
+});
+app.get("/shop", (req, res) => {
+  res.render("shop");
+});
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
