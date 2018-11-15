@@ -12,6 +12,7 @@ const morgan = require('morgan');
 const userRoutes = require("./routes/user");
 const productRoutes = require("./routes/products");
 const orderRoutes = require('./routes/order');
+const textRoutes = require('./routes/text');
 
 // Load the logger first so all (static) HTTP requests are logged to STDOUT
 // 'dev' = Concise output colored by response status for development use.
@@ -28,6 +29,7 @@ app.use(bodyParser.json());
 app.use("/user", userRoutes);
 app.use("/products", productRoutes);
 app.use('/order', orderRoutes);
+app.use("/text", textRoutes);
 // Home page
 app.get("/", (req, res) => {
   res.json({
@@ -35,6 +37,8 @@ app.get("/", (req, res) => {
     ready: true
   });
 });
+
+
 
 app.listen(PORT, () => {
   console.log("Example app listening on port " + PORT);
