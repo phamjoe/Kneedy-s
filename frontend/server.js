@@ -10,11 +10,13 @@ const morgan = require('morgan');
 //const knexLogger  = require('knex-logger');
 
 let productDatabase = {
-    id: 1,
-    product: 'burger',
-    desc: '8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce',
-    price: 4.99,
     
+    id: 1,
+    name: 'burger',
+    description: '8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce',
+    price: 4.99,
+    imgURL: '../public/src/images/person_2.jpg'
+
 };
 
 app.use(morgan('dev'));
