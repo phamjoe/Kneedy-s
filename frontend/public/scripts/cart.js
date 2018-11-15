@@ -1,16 +1,12 @@
 const items = [];
 
 $(".add-cart").on( "click", function() {
-    let itemClicked = $(this).parent('p').siblings('p')
-    let clicked = [];
-    clicked.push(itemClicked);
+    let div = $(this).closest("div")
     let addedItem = {
-        description : document.getElementsByClassName('description')[0],
-        price : clicked[0][1].innerText
+        name : div.find(".product").text(),
+        description : div.find(".description").text(),
+        price : div.find(".price").text()
     }
     items.push(addedItem);
-
     console.log(items);
-
-
 });
