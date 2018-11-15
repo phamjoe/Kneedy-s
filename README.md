@@ -1,4 +1,5 @@
-# Node Skeleton
+# Kneedy's Sandwich/Burger shop
+    ###### and maybe croissants ;)
 
 ## Project Setup
 
