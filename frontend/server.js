@@ -9,6 +9,13 @@ const sass = require("node-sass-middleware");
 const morgan = require('morgan');
 //const knexLogger  = require('knex-logger');
 
+let productDatabase = {
+    id: 1,
+    product: 'burger',
+    desc: '8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce',
+    price: 4.99,
+    
+};
 
 app.use(morgan('dev'));
 
@@ -45,7 +52,10 @@ app.get("/contact", (req, res) => {
   res.render("contact");
 });
 app.get("/order", (req, res) => {
-  res.render("order");
+  let templateVars = {
+    product: productDatabase
+  };
+  res.render("order", templateVars);
 });
 
 app.listen(PORT, () => {
