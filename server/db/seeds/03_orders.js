@@ -1,19 +1,19 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex("orders")
     .del()
-    .then(function() {
+    .then(function () {
       return Promise.all([
         knex("orders").insert({
-          date: new Date(),
+          date: new Date().toLocaleString(),
           user_id: 1
         }),
         knex("orders").insert({
-          date: new Date(),
-          user_id: 2
+          date: new Date().toLocaleString(),
+          user_id: 1
         }),
         knex("orders").insert({
-          date: new Date(),
+          date: new Date().toLocaleString(),
           user_id: 3
         })
       ]);
