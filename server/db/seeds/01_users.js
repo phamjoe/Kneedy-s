@@ -10,7 +10,6 @@ exports.seed = function (knex, Promise) {
           email: "me@me.com"
         }),
         knex("users").insert({
-
           first_name: "Bob",
           last_name: "bill",
           phone: "2222222222",

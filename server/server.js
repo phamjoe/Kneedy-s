@@ -20,8 +20,10 @@ app.use(morgan('dev'));
 
 
 app.use(bodyParser.urlencoded({
-  extended: true
+  extended: false
 }));
+// parse application/json
+app.use(bodyParser.json());
 // Mount all resource routes
 app.use("/user", userRoutes);
 app.use("/products", productRoutes);
