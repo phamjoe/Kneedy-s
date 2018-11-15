@@ -23,7 +23,6 @@ module.exports = {
   getAllProducts: () => {
     return knex('products').then((resolve, reject) => {
       if (reject) throw reject;
-      //console.log(resolve);
       return resolve;
     });
   }
