@@ -4,3 +4,9 @@ public/styles
 *.log
 *.sqlite3
 .vscode
+.DS_Store
+frontend/.DS_Store
+frontend/public/.DS_Store
+frontend/public/src/.DS_Store
+public/.DS_Store
+views/.DS_Store
