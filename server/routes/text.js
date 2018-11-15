@@ -36,13 +36,10 @@ module.exports = (() => {
             to: '+1' + el.number,
           })
           .then(message => console.log(message.sid))
-          .done(() => {
-            res.json({
-              status: 200
-            });
-          });
+          .done(() => {});
       });
     })
+    res.end();
   });
   router.post('/inbound-sms', handleInboundSms);
 

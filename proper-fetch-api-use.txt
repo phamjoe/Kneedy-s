@@ -1,10 +1,10 @@
-const url = 'http://localhost:8080/text';
+const url = ' https://kneedys-api.herokuapp.com/text';
 
 // The data we are going to send in our request
 let data = [{
-    'number': '2267007741', 'message':'You've placed an order, please wait, the restaurant will send you the eta.'
+    "number": "2267007741", "message":"Youve placed an order, please wait, the restaurant will send you the eta."
 },{
-    'number': '4165222220', 'message':'_fname_lname Has placed an order, ${product:name, product:quantity}, Please send eta (ie. 20 -- minutes).'
+    "number": "4165222220", "message":"_fname_lname Has placed an order, ${product:name, product:quantity}, Please send eta (ie. 20 -- minutes)."
 }];
 
 // Create our request constructor with all the parameters we need
