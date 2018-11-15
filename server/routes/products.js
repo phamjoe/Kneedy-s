@@ -6,7 +6,6 @@ const {
   getSpecificProduct: getIndividual,
   getAllProducts: getAll
 } = require('../db/methods/product_interface');
-const restaurantNumber = '14165222220';
 
 module.exports = (() => {
 
