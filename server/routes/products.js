@@ -3,19 +3,30 @@
 const express = require('express');
 const router = express.Router();
 const {
-  getIndividual,
-  getAll
+  getSpecificProduct: getIndividual,
+  getAllProducts: getAll
 } = require('../db/methods/product_interface');
 const restaurantNumber = '14165222220';
 
 module.exports = (() => {
 
   router.get("/", (req, res) => {
-    res.json(JSON.stringify(getAll()));
+    getAll().then((resolve, reject) => {
+      if (reject) throw reject;
+      res.json({
+        data: resolve
+      });
+    })
+
   });
   router.get('/:product_id', (req, res) => {
-    const productInfo = getIndividual(req.params.product_id);
-    res.json(JSON.stringify(productInfo));
+    getIndividual(req.params.product_id).then((resolve, reject) => {
+      if (reject) throw reject;
+      res.json({
+        data: resolve
+      });
+    });
+
   });
   return router;
 })();
