@@ -10,7 +10,7 @@ exports.seed = function (knex, Promise) {
         }),
         knex("orders").insert({
           date: new Date().toLocaleString(),
-          user_id: 2
+          user_id: 1
         }),
         knex("orders").insert({
           date: new Date().toLocaleString(),

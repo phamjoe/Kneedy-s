@@ -13,18 +13,14 @@ module.exports = (() => {
   router.get("/", (req, res) => {
     getAll().then((resolve, reject) => {
       if (reject) throw reject;
-      res.json({
-        data: resolve
-      });
+      res.json(resolve);
     })
 
   });
   router.get('/:product_id', (req, res) => {
     getIndividual(req.params.product_id).then((resolve, reject) => {
       if (reject) throw reject;
-      res.json({
-        data: resolve
-      });
+      res.json(resolve);
     });
 
   });

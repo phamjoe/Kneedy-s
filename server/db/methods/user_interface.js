@@ -9,7 +9,7 @@ module.exports = {
       })
       .join('products_by_order', 'orders.id', '=', 'products_by_order.order_id')
       .join('products', 'products_by_order.product_id', '=', 'products.id')
-      .select('orders.date', 'products_by_order.quantity', 'products.name');
+      .select('orders.date', 'products_by_order.quantity', 'products.name', 'orders.id');
   },
   getUserInfo: (user_id) => {
     return knex('users').where({
