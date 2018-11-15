@@ -1,6 +1,6 @@
 # Kneedy's Sandwich/Burger shop
 
-    ###### and maybe croissants ;)
+   ###### and maybe croissants ;)
 
 ## Project Setup
 
