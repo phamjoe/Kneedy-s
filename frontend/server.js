@@ -9,15 +9,48 @@ const sass = require("node-sass-middleware");
 const morgan = require('morgan');
 //const knexLogger  = require('knex-logger');
 
-let productDatabase = {
-    
+let productDatabase = [{
     id: 1,
     name: 'burger',
     description: '8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce',
     price: 4.99,
     imgURL: '../public/src/images/person_2.jpg'
-
-};
+},
+{
+  id: 2,
+  name: 'Sandwich',
+  description: 'Le sandwich jambon beurre fromage',
+  price: 6.99,
+  imgURL: '../public/src/images/person_2.jpg'
+},
+{
+  id: 3,
+  name: 'Poutine',
+  description: 'french fries... drowned into a gravy sauce and curly cheese',
+  price: 2.99,
+  imgURL: '../public/src/images/person_2.jpg'
+},
+{
+  id: 4,
+  name: 'Veggie Burger',
+  description: 'we just removed the meet from our burger and voila',
+  price: 4.49,
+  imgURL: '../public/src/images/person_2.jpg'
+},
+{
+  id: 5,
+  name: 'Avocado Burger',
+  description: 'Slices of fresh avocado, avocado bread with the famous guacamole sauce',
+  price: 19.99,
+  imgURL: '../public/src/images/person_2.jpg'
+},
+{
+  id: 6,
+  name: 'Empty burger',
+  description: 'Two delicious gluten-free buns, filled with nothing.',
+  price: 1.99,
+  imgURL: '../public/src/images/person_2.jpg'
+}];
 
 app.use(morgan('dev'));
 
