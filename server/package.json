@@ -13,11 +13,12 @@
   "license": "ISC",
   "dependencies": {
     "body-parser": "^1.18.3",
+    "dotenv": "6.1.0",
     "express": "^4.16.4",
     "knex": "^0.15.2",
     "morgan": "^1.9.1",
     "pg": "^7.6.1",
-    "dotenv": "6.1.0"
+    "twilio": "^3.23.2"
   },
   "devDependencies": {
     "nodemon": "^1.18.6"

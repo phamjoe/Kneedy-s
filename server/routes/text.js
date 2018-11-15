@@ -28,8 +28,8 @@ module.exports = (() => {
   });
 
 
-  router.get('/webhooks/inbound-sms', handleInboundSms);
-  router.post('/webhooks/inbound-sms', handleInboundSms);
+  router.get('/inbound-sms', handleInboundSms);
+  router.post('/inbound-sms', handleInboundSms);
 
 
 
