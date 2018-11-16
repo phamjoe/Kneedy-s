@@ -9,10 +9,17 @@ $('.add-cart').on("click", function() {
         id : div.find(".productID").text(),
         quantity : 1
     }
-    checkCart(cartItems, addedItem);
+    const flag = checkCart(cartItems, addedItem);
+    console.log(flag);
+
+    if (flag[0] == 1) {
+        cartItems[flag[1]]['quantity'] += 1;
+        updateCart(cartItems)
+    } else {
     cartItems.push(addedItem);
-    console.log(cartItems);
     updateCart(cartItems);
+    }
+    console.log(cartItems);
 });
 
 function updateCart(items){
@@ -21,23 +28,21 @@ function updateCart(items){
 }
 
 
-
-// id {
-//     name : div.find(".product").text(),
-//     description : div.find(".description").text(),
-//     price : div.find(".price").text()
-// }
-
+// This function checks if an item is already present in the cart
+// if it's not the case, it adds the object representing the product
+// if the item is already present, it returns a flag to inform us it 
+// is the case and the position in the array where we need to update the
+// object
 function checkCart(cartItems, addedItem) {
-    let flag = 0
-    checkItem = addedItem.id
+    let flagItem = [0];
+    checkItem = addedItem.id;
     if (cartItems) {
         for( let i = 0; i < cartItems.length; i++) {
             if (cartItems[i]['id'] == checkItem) {
-                flag = 1
+                flagItem[0] = 1;
+                flagItem[1]= i;
             }
         }
     }
-    console.log(flag);
-    return(flag);
+    return(flagItem);
 }
