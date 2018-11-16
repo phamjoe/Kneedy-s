@@ -55,7 +55,10 @@ function checkCart(cartItems, addedItem) {
 
 function buildProduct(info){
     let objs = [];
-   
+    let $subtotal = $('.subtotal');
+    let $tax = $('.tax');
+    let $total = $('.total');
+    let subtotal = 0;
     info.forEach(element => {
         let priceTrim = element.price;
         priceTrim = priceTrim.substr(1);
@@ -76,10 +79,13 @@ function buildProduct(info){
 		<input type="text" name="quantity" class="quantity form-control input-number" value="${element.quantity}" min="1" max="100">
 		</div>
 		</td>
-		<td class="total">$${element.quantity * priceTrim}</td>
+		<td class="item-total">$${element.quantity * priceTrim}</td>
 		</tr>`);
         objs.push(el);
-
+        subtotal += element.quantity * priceTrim;
+        $subtotal.text(subtotal);
+        $tax.text((subtotal*0.13).toFixed(2));
+        $total.text((subtotal*1.13).toFixed(2));
     });
     return Promise.resolve(objs);
 
@@ -102,7 +108,6 @@ function getProduct(){
             localStorage.setItem('cart', JSON.stringify(items));
         });
     });
-    
 }
 if(window.cart === true){
     getProduct();
