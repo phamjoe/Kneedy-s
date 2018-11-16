@@ -6,6 +6,7 @@ $('.add-cart').on("click", function() {
         name : div.find(".product").text(),
         description : div.find(".description").text(),
         price : div.find(".price").text(),
+<<<<<<< HEAD:frontend/public/scripts/cart.js
         id : div.find(".productID").text(),
         quantity : 1
     }
@@ -16,14 +17,25 @@ $('.add-cart').on("click", function() {
         cartItems[flag[1]]['quantity'] += 1;
         updateCart(cartItems)
     } else {
+=======
+        quantity : 1
+    }
+    
+    addedItem['quantity'] =  1 || addedItem['quantity']+1;
+>>>>>>> 8fe27afbb3477ce3987df432e1f20d97d85c7cc9:frontend/public/scripts/cart-update.js
     cartItems.push(addedItem);
     updateCart(cartItems);
+<<<<<<< HEAD:frontend/public/scripts/cart.js
     }
     console.log(cartItems);
+=======
+    localStorage(cart, cartItems);
+>>>>>>> 8fe27afbb3477ce3987df432e1f20d97d85c7cc9:frontend/public/scripts/cart-update.js
 });
 
 function updateCart(items){
     let $count = $('.counter');
+<<<<<<< HEAD:frontend/public/scripts/cart.js
     $count.text(items.length)
 }
 
@@ -45,4 +57,13 @@ function checkCart(cartItems, addedItem) {
         }
     }
     return(flagItem);
+=======
+    $count.text(items.length);
+    
+}
+
+function getName(index){
+    console.log(cartItems[index].name);
+    return cartItems[index].name;
+>>>>>>> 8fe27afbb3477ce3987df432e1f20d97d85c7cc9:frontend/public/scripts/cart-update.js
 }
