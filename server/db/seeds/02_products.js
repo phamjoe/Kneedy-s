@@ -1,15 +1,14 @@
-exports.seed = function(knex, Promise) {
+exports.seed = function (knex, Promise) {
   // Deletes ALL existing entries
   return knex("products")
     .del()
-    .then(function() {
+    .then(function () {
       return Promise.all([
         knex("products").insert({
           name: "burger",
-          description:
-            "8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce",
+          description: "8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce",
           price: 4.99,
-          imgUrl: "http://localhost:8080/src/imgs/bottle.jpg",
+          imgUrl: "burger-1.jpg",
           type: "food"
         }),
         knex("products").insert({
@@ -21,8 +20,7 @@ exports.seed = function(knex, Promise) {
         }),
         knex("products").insert({
           name: "Poutine",
-          description:
-            "french fries... drowned into a gravy sauce and curly cheese",
+          description: "french fries... drowned into a gravy sauce and curly cheese",
           price: 2.99,
           imgUrl: "http://localhost:8080/src/imgs/burger.jpg",
           type: "food"
@@ -31,13 +29,12 @@ exports.seed = function(knex, Promise) {
           name: "Veggie Burger",
           description: "we just removed the meet from our burger and voila",
           price: 4.48,
-          imgUrl: "http://localhost:8080/src/imgs/water.jpg",
+          imgUrl: "burger-3.jpg",
           type: "food"
         }),
         knex("products").insert({
           name: "Avocado Burger",
-          description:
-            "Slices of fresh avocado, avocado bread with the famous guacamole sauce",
+          description: "Slices of fresh avocado, avocado bread with the famous guacamole sauce",
           price: 19.99,
           imgUrl: "http://localhost:8080/src/imgs/juice.jpg",
           type: "food"
@@ -51,24 +48,21 @@ exports.seed = function(knex, Promise) {
         }),
         knex("products").insert({
           name: "Coca-Cola",
-          description:
-            "Dark drink with bubbles in it. Sounds weird but it is good",
+          description: "Dark drink with bubbles in it. Sounds weird but it is good",
           price: 1.99,
           imgUrl: "http://localhost:8080/src/imgs/salami.jpg",
           type: "drink"
         }),
         knex("products").insert({
           name: "Water",
-          description:
-            "You would be surprised, but in fact it is possible to drink this even if it is tasteless",
+          description: "You would be surprised, but in fact it is possible to drink this even if it is tasteless",
           price: 1.99,
           imgUrl: "http://localhost:8080/src/imgs/salami.jpg",
           type: "drink"
         }),
         knex("products").insert({
           name: "Root beer",
-          description:
-            "Who did that? We do not know but some people appreciate it with their burgers",
+          description: "Who did that? We do not know but some people appreciate it with their burgers",
           price: 1.99,
           imgUrl: "http://localhost:8080/src/imgs/salami.jpg",
           type: "drink"
