@@ -132,7 +132,9 @@ app.get("/about", (req, res) => {
   res.render("about");
 });
 app.get("/cart", (req, res) => {
-  res.render("cart");
+  res.render("cart",{
+    "cart":true
+  });
 });
 app.get("/checkout", (req, res) => {
   res.render("checkout");
