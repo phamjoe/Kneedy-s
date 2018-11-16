@@ -26,7 +26,10 @@ function updateCart(){
     let $count = $('.counter');
     let items = JSON.parse(window.localStorage.getItem('cart'));
     console.log(items);
-    $count.text(items.length)
+    if(items){
+        $count.text(items.length)
+    }
+    
     return true;
 }
 
