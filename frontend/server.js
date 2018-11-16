@@ -8,8 +8,6 @@ const app = express();
 const sass = require("node-sass-middleware");
 const morgan = require('morgan');
 const fetch = require('node-fetch');
-//const knexLogger  = require('knex-logger');
-
 
 app.use(morgan('dev'));
 
