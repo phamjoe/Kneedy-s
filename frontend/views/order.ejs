@@ -78,11 +78,12 @@
 													<div class="menu-entry">
 														<a href="#" class="img" style="background-image: url(/src/images/menu-2.jpg);"></a>
 														<div class="text text-center pt-4">
-															<h3><%=element['name']%></h3>
+															<h3 class="product"><%=element['name']%></h3>
 															<p class="description"><%=element['description']%></p>
 															<p class="price"><span>$<%=element['price']%></span></p>
+															<p class="productID"><%=element['id']%></p>
 															<p><input type="submit" class="btn btn-primary btn-outline-primary add-cart" value="Add to Cart"></p>
-															<p><input name="productID" type="hidden" value="<%=element['id']%>"></p>
+															<p class="productID" type="hidden" value="<%=element['id']%>"></p>
 														</div>
 													</div>
 												</div>
@@ -104,7 +105,7 @@
 																<p class="description"><%=element['description']%></p>
 																<p class="price"><span>$<%=element['price']%></span></p>
 																<p><input type="submit" class="btn btn-primary btn-outline-primary add-cart" value="Add to Cart"></p>
-																<p><input name="productID" type="hidden" value="<%=element['id']%>"></p>
+																<p class="productID" type="hidden" value="<%=element['id']%>"></p>
 															</div>
 														</div>
 													</div>
@@ -126,7 +127,7 @@
 																<p class="description"><%=element['description']%></p>
 																<p class="price"><span>$<%=element['price']%></span></p>
 																<p><input type="submit" class="btn btn-primary btn-outline-primary add-cart" value="Add to Cart"></p>
-																<p><input name="productID" type="hidden" value="<%=element['id']%>"></p>
+																<p class="productID" type="hidden" value="<%=element['id']%>"></p>
 															</div>
 														</div>
 													</div>
