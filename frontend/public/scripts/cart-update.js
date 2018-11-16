@@ -1,25 +1,142 @@
+let db = [{
+    id: 1,
+    name: 'burger',
+    description: '8oz beef patty, with cheddar chesse, maple bacon, lettuce, tomato and our special sauce',
+    price: 4.99,
+    imgURL: '../public/src/images/person_2.jpg',
+    type: 'food',
+    quantity: 0
+},
+{
+  id: 2,
+  name: 'Sandwich',
+  description: 'Le sandwich jambon beurre fromage',
+  price: 6.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'food',
+  quantity: 0
+},
+{
+  id: 3,
+  name: 'Poutine',
+  description: 'french fries... drowned into a gravy sauce and curly cheese',
+  price: 2.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'food',
+  quantity: 0
+},
+{
+  id: 4,
+  name: 'Veggie Burger',
+  description: 'we just removed the meet from our burger and voila',
+  price: 4.49,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'food',
+  quantity: 0
+},
+{
+  id: 5,
+  name: 'Avocado Burger',
+  description: 'Slices of fresh avocado, avocado bread with the famous guacamole sauce',
+  price: 19.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'food',
+  quantity: 0
+},
+{
+  id: 6,
+  name: 'Empty burger',
+  description: 'Two delicious gluten-free buns, filled with nothing.',
+  price: 1.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'food',
+  quantity: 0
+},
+{
+  id: 7,
+  name: 'Coca-Cola',
+  description: 'Dark drink with bubbles in it. Sounds weird but it is good',
+  price: 1.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'drink',
+  quantity: 0
+},
+{
+  id: 8,
+  name: 'Water',
+  description: 'You would be surprised, but in fact it is possible to drink this even if it is tasteless',
+  price: 1.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'drink',
+  quantity: 0
+},
+{
+  id: 9,
+  name: 'Root beer',
+  description: 'Who did that? We do not know but some people appreciate it with their burgers',
+  price: 1.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'drink',
+  quantity: 0
+},
+{
+  id: 10,
+  name: 'Chocolatine',
+  description: 'Just enjoy this amazing pastry, just perfectly named',
+  price: 3.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'dessert',
+  quantity: 0
+},
+{
+  id: 11,
+  name: 'Brownie',
+  description: 'This will kill you, but it is really also really good',
+  price: 3.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'dessert',
+  quantity: 0
+},
+{
+  id: 12,
+  name: 'Crême brulée',
+  description: 'You like caramel and you need a sweet hug? Try this!',
+  price: 3.99,
+  imgURL: '../public/src/images/person_2.jpg',
+  type: 'dessert',
+  quantity: 0
+}];
+
 cartItems = ( typeof cartItems != 'undefined' && cartItems instanceof Array ) ? cartItems : [];
+
+
+
+const actualCart = () => {
+    let items = JSON.parse(window.localStorage.getItem('cart'));
+    const itemsQuantity = items.reduce(function(prev, cur) {
+        prev[cur] = (prev[cur] || 0) + 1;
+        return prev;
+    }, {});
+
+    let cart = [];
+    for (each in itemsQuantity) {
+        let product = db[each - 1];
+        product.quantity = itemsQuantity[each];
+        cart.push(product);
+    }
+    
+
+
+    return(cart);
+}
 
 $('.add-cart').on("click", function() {
     let div = $(this).closest("div");
-    let addedItem = {
-        name : div.find(".product").text(),
-        description : div.find(".description").text(),
-        price : div.find(".price").text(),
-        id : div.find(".productID").text(),
-        quantity : 1
-    }
-    const flag = checkCart(cartItems, addedItem);
-
-    if (flag[0] == 1) {
-        cartItems[flag[1]]['quantity'] += 1;
-        updateCart(cartItems)
-        localStorage.setItem('cart', JSON.stringify(cartItems));
-    } else {
-    cartItems.push(addedItem);
-    updateCart(cartItems);
+    let productId = div.find(".productID").text();
+    cartItems.push(productId);
     localStorage.setItem('cart', JSON.stringify(cartItems));
-    }
+    console.log(actualCart());
+    
 });
 
 function updateCart(){
@@ -34,24 +151,20 @@ function updateCart(){
 }
 
 
-// This function checks if an item is already present in the cart
-// if it's not the case, it adds the object representing the product
-// if the item is already present, it returns a flag to inform us it 
-// is the case and the position in the array where we need to update the
-// object
-function checkCart(cartItems, addedItem) {
-    let flagItem = [0];
-    checkItem = addedItem.id;
-    if (cartItems) {
-        for( let i = 0; i < cartItems.length; i++) {
-            if (cartItems[i]['id'] == checkItem) {
-                flagItem[0] = 1;
-                flagItem[1]= i;
-            }
-        }
+
+function checkCart(cart, item) {
+    if (flag[0] == 1) {
+        cart[flag[1]]['quantity'] += 1;
+        updateCart(cartItems)
+        localStorage.setItem('cart', JSON.stringify(cartItems));
+    } else {
+    cartItems.push(item);
+    updateCart(cartItems);
+    localStorage.setItem('cart', JSON.stringify(cartItems));
     }
-    return(flagItem);
-}
+};
+
+
 
 function buildProduct(info){
     let objs = [];

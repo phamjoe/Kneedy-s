@@ -82,7 +82,7 @@ let productDatabase = [{
   type: 'drink'
 },
 {
-  id: 9,
+  id: 10,
   name: 'Chocolatine',
   description: 'Just enjoy this amazing pastry, just perfectly named',
   price: 3.99,
@@ -90,7 +90,7 @@ let productDatabase = [{
   type: 'dessert'
 },
 {
-  id: 9,
+  id: 11,
   name: 'Brownie',
   description: 'This will kill you, but it is really also really good',
   price: 3.99,
@@ -98,13 +98,15 @@ let productDatabase = [{
   type: 'dessert'
 },
 {
-  id: 9,
+  id: 12,
   name: 'Crême brulée',
   description: 'You like caramel and you need a sweet hug? Try this!',
   price: 3.99,
   imgURL: '../public/src/images/person_2.jpg',
   type: 'dessert'
 }];
+
+
 
 app.use(morgan('dev'));
 
