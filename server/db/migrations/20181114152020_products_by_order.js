@@ -5,7 +5,7 @@ exports.up = function (knex, Promise) {
       table.foreign('order_id').references('orders.id');
       table.integer('product_id').unsigned();
       table.foreign('product_id').references('products.id');
-      table.integer('quantitiy').unsigned();
+      table.integer('quantity').unsigned();
     })
   ]);
 };

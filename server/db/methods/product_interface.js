@@ -3,27 +3,27 @@ const knex = require('./knex_interface');
 module.exports = {
   getSpecificProduct: (id = null, ids = null) => {
     if (!ids) {
-      knex('products')
+      return knex('products')
         .where({
           'id': id
         })
         .then((resolve, reject) => {
           if (reject) throw reject;
-          return [...resolve];
+          return resolve;
         })
     } else {
-      knex('products')
+      return knex('products')
         .whereIn('id', id)
         .then((resolve, reject) => {
           if (reject) throw reject;
-          return [...resolve];
+          return resolve;
         })
     }
   },
   getAllProducts: () => {
-    knex('products').then((resolve, reject) => {
+    return knex('products').then((resolve, reject) => {
       if (reject) throw reject;
-      return [...resolve];
+      return resolve;
     });
   }
-}
+};
