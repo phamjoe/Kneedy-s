@@ -10,23 +10,22 @@ $('.add-cart').on("click", function() {
         quantity : 1
     }
     const flag = checkCart(cartItems, addedItem);
-    console.log(flag);
 
     if (flag[0] == 1) {
         cartItems[flag[1]]['quantity'] += 1;
         updateCart(cartItems)
+        localStorage.setItem('cart', JSON.stringify(cartItems));
     } else {
     cartItems.push(addedItem);
     updateCart(cartItems);
     localStorage.setItem('cart', JSON.stringify(cartItems));
     }
-    console.log(cartItems);
 });
 
 function updateCart(){
     let $count = $('.counter');
     let items = JSON.parse(window.localStorage.getItem('cart'));
-    //console.log(items);
+    console.log(items);
     $count.text(items.length)
     return true;
 }
@@ -71,7 +70,7 @@ function buildProduct(info){
 		<td class="price">${element.price}</td>
 		<td class="quantity">
 		<div class="input-group mb-3">
-		<input type="text" name="quantity" class="quantity form-control input-number" value="1" min="1" max="100">
+		<input type="text" name="quantity" class="quantity form-control input-number" value="${element.quantity}" min="1" max="100">
 		</div>
 		</td>
 		<td class="total">$${element.quantity * priceTrim}</td>
