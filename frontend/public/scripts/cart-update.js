@@ -1,14 +1,16 @@
-cartItems = ( typeof cartItems != 'undefined' && cartItems instanceof Array ) ? cartItems : [];
+cartItems = (typeof cartItems != 'undefined' && cartItems instanceof Array) ? cartItems : [];
 
-$('.add-cart').on("click", function() {
+$('.add-cart').on("click", function () {
     let div = $(this).closest("div");
     let addedItem = {
-        name : div.find(".product").text(),
-        description : div.find(".description").text(),
-        price : div.find(".price").text(),
-        id : div.find(".productID").text(),
-        quantity : 1
+        name: div.find(".product").text(),
+        description: div.find(".description").text(),
+        price: div.find(".price").text(),
+        id: div.find(".productID").text(),
+        quantity: 1,
+        url: div.siblings(".product-img").css('background-image')
     }
+    console.log(div.siblings(".product-img").css('background-image'));
     const flag = checkCart(cartItems, addedItem);
 
     if (flag[0] == 1) {
@@ -16,20 +18,20 @@ $('.add-cart').on("click", function() {
         updateCart(cartItems)
         localStorage.setItem('cart', JSON.stringify(cartItems));
     } else {
-    cartItems.push(addedItem);
-    updateCart(cartItems);
-    localStorage.setItem('cart', JSON.stringify(cartItems));
+        cartItems.push(addedItem);
+        updateCart(cartItems);
+        localStorage.setItem('cart', JSON.stringify(cartItems));
     }
 });
 
-function updateCart(){
+function updateCart() {
     let $count = $('.counter');
     let items = JSON.parse(window.localStorage.getItem('cart'));
     console.log(items);
-    if(items){
+    if (items) {
         $count.text(items.length)
     }
-    
+
     return true;
 }
 
@@ -43,17 +45,17 @@ function checkCart(cartItems, addedItem) {
     let flagItem = [0];
     checkItem = addedItem.id;
     if (cartItems) {
-        for( let i = 0; i < cartItems.length; i++) {
+        for (let i = 0; i < cartItems.length; i++) {
             if (cartItems[i]['id'] == checkItem) {
                 flagItem[0] = 1;
-                flagItem[1]= i;
+                flagItem[1] = i;
             }
         }
     }
-    return(flagItem);
+    return (flagItem);
 }
 
-function buildProduct(info){
+function buildProduct(info) {
     let objs = [];
     let $subtotal = $('.subtotal');
     let $tax = $('.tax');
@@ -66,7 +68,7 @@ function buildProduct(info){
         <tr class="text-center">
 		<td class="product-remove"><button class="btn btn-outline-black remove-item"><span class="icon-close"></span></button></td>
 		<td class="image-prod">
-		<div class="img" style="background-image:url(/src/images/menu-2.jpg);"></div>
+		<div class="img" style='background-image:${element.url};'></div>
         </td>
     	<td class="product-name">
 		<h3 class="name">
@@ -84,23 +86,24 @@ function buildProduct(info){
         objs.push(el);
         subtotal += element.quantity * priceTrim;
         $subtotal.text(subtotal);
-        $tax.text((subtotal*0.13).toFixed(2));
-        $total.text((subtotal*1.13).toFixed(2));
+        $tax.text((subtotal * 0.13).toFixed(2));
+        $total.text((subtotal * 1.13).toFixed(2));
     });
     return Promise.resolve(objs);
 
 }
-function renderEls(els){
-    els.forEach((el)=>{
+
+function renderEls(els) {
+    els.forEach((el) => {
         $('tbody').append(el);
     });
 }
 
-function getProduct(){
+function getProduct() {
     JSON.parse(window.localStorage.getItem('cart'));
     let items = JSON.parse(window.localStorage.getItem('cart'));
-    buildProduct(items).then(renderEls).then(()=>{
-        $('.remove-item').on("click", function() {
+    buildProduct(items).then(renderEls).then(() => {
+        $('.remove-item').on("click", function () {
             let index = $('.remove-item').index(this);
             let tr = $(this).closest('tr');
             $(tr).remove();
@@ -109,12 +112,11 @@ function getProduct(){
         });
     });
 }
-if(window.cart === true){
+if (window.cart === true) {
     getProduct();
 }
 
-$('.clear-cart').on("click", function() {
-    $( ".root" ).empty();
+$('.clear-cart').on("click", function () {
+    $(".root").empty();
     window.localStorage.clear();
 });
-
