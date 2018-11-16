@@ -55,13 +55,13 @@ function checkCart(cartItems, addedItem) {
 
 function buildProduct(info){
     let objs = [];
-    
+   
     info.forEach(element => {
         let priceTrim = element.price;
         priceTrim = priceTrim.substr(1);
         let el = $(`
         <tr class="text-center">
-		<td class="product-remove"><a href="#"><span class="icon-close"></span></a></td>
+		<td class="product-remove"><button class="btn btn-outline-black remove-item"><span class="icon-close"></span></button></td>
 		<td class="image-prod">
 		<div class="img" style="background-image:url(/src/images/menu-2.jpg);"></div>
         </td>
@@ -79,6 +79,7 @@ function buildProduct(info){
 		<td class="total">$${element.quantity * priceTrim}</td>
 		</tr>`);
         objs.push(el);
+
     });
     return Promise.resolve(objs);
 
@@ -92,9 +93,23 @@ function renderEls(els){
 function getProduct(){
     JSON.parse(window.localStorage.getItem('cart'));
     let items = JSON.parse(window.localStorage.getItem('cart'));
-    buildProduct(items).then(renderEls);
+    buildProduct(items).then(renderEls).then(()=>{
+        $('.remove-item').on("click", function() {
+            let index = $('.remove-item').index(this);
+            let tr = $(this).closest('tr');
+            $(tr).remove();
+            items.splice(index, 1);
+            localStorage.setItem('cart', JSON.stringify(items));
+        });
+    });
     
 }
 if(window.cart === true){
     getProduct();
 }
+
+$('.clear-cart').on("click", function() {
+    $( ".root" ).empty();
+    window.localStorage.clear();
+});
+
