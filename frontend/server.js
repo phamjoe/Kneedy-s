@@ -8,7 +8,9 @@ const app = express();
 const sass = require("node-sass-middleware");
 //const morgan = require('morgan');
 const fetch = require('node-fetch');
-const db = require('./db');
+const passport = require('passport');
+const Strategy = require('passport-local').Strategy;
+const userDB = require('./db');
 app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
 app.use(require('cookie-parser')());
 var loki = require('lokijs'),
@@ -27,7 +29,7 @@ function loadCollection(colName, callback) {
 
 passport.use(new Strategy(
   function(username, password, cb) {
-    db.users.findByUsername(username, function(err, user) {
+    userDB.users.findByUsername(username, function(err, user) {
       if (err) { return cb(err); }
       if (!user) { return cb(null, false); }
       if (user.password != password) { return cb(null, false); }
@@ -40,7 +42,7 @@ passport.serializeUser(function(user, cb) {
 });
 
 passport.deserializeUser(function(id, cb) {
-  db.users.findById(id, function (err, user) {
+  userDB.users.findById(id, function (err, user) {
     if (err) { return cb(err); }
     cb(null, user);
   });
