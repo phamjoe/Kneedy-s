@@ -6,7 +6,6 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const sass = require("node-sass-middleware");
-const morgan = require('morgan');
 const fetch = require('node-fetch');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;

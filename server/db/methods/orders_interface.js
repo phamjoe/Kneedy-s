@@ -1,9 +1,11 @@
 const knex = require('./knex_interface');
-
+// Expose methods to wherever they are needed
 module.exports = {
+  // Update an existing order
   updateOrder: () => {
-
+    // Will be implemented at some point in the future
   },
+  // Add a new order to the database
   addNewOrder: (user_id, options) => {
     knex('orders').insert({
       date: new Date().toLocaleString(),
@@ -21,6 +23,7 @@ module.exports = {
     });
     return Promise.resolve(true);
   },
+  // Return details about an  existing order
   getOrderDetails: (order_id) => {
     return knex('orders')
       .where({
