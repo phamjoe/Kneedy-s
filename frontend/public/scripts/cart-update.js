@@ -85,7 +85,7 @@ function buildProduct(info) {
 		</tr>`);
         objs.push(el);
         subtotal += element.quantity * priceTrim;
-        $subtotal.text(subtotal);
+        $subtotal.text(subtotal.toFixed(2));
         $tax.text((subtotal * 0.13).toFixed(2));
         $total.text((subtotal * 1.13).toFixed(2));
     });
@@ -114,6 +114,12 @@ function getProduct() {
 }
 if (window.cart === true) {
     getProduct();
+}
+
+
+function updatePrice(){
+    let $total = $('.total');
+    $total.text();
 }
 
 $('.clear-cart').on("click", function () {
