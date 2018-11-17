@@ -1,25 +1,25 @@
 require('dotenv').config();
 const express = require("express");
 const router = express.Router();
-const fetch = require('node-fetch');
 // Your Account Sid and Auth Token from twilio.com/console
 const accountSid = process.env.ACCOUNT_SID;
 const authToken = process.env.AUTH_TOKEN;
 const client = require('twilio')(accountSid, authToken);
-const FRONT_URL = process.env.FRONTEND_PUBLIC_URL;
 
 function handleInboundSms(request, response) {
   const params = Object.assign(request.query, request.body)
   console.log(params.Body);
-  fetch(FRONT_URL, {
-    method: 'POST',
-    body: JSON.stringify({
-      eta: params.Body
+  client.messages
+    .create({
+      body: "It's gonna take " + params.Body + " minutes.",
+      from: '+16474934161',
+      to: '+12267007741',
     })
-  }).then((res) => {
-    console.log("Eta Sent");
-  });
-  response.status(204).send()
+    .then(message => console.log(message.sid))
+    .done(() => {
+      response.status(204).send();
+    });
+
 }
 
 module.exports = (() => {

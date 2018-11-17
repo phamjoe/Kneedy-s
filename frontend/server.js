@@ -144,7 +144,6 @@ app.get("/checkout", (req, res) => {
 });
 
 app.post('/checkout', (req, res) => {
-
   loadCollection('sessionCart', function (col) {
     //show the users
     let data = col.data;
