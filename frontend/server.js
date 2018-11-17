@@ -8,6 +8,9 @@ const app = express();
 const sass = require("node-sass-middleware");
 //const morgan = require('morgan');
 const fetch = require('node-fetch');
+const db = require('./db');
+app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('cookie-parser')());
 var loki = require('lokijs'),
   db = new loki('quickstart.db');
 
@@ -21,6 +24,28 @@ function loadCollection(colName, callback) {
     callback(_collection);
   });
 }
+
+passport.use(new Strategy(
+  function(username, password, cb) {
+    db.users.findByUsername(username, function(err, user) {
+      if (err) { return cb(err); }
+      if (!user) { return cb(null, false); }
+      if (user.password != password) { return cb(null, false); }
+      return cb(null, user);
+    });
+  }));
+
+passport.serializeUser(function(user, cb) {
+  cb(null, user.id);
+});
+
+passport.deserializeUser(function(id, cb) {
+  db.users.findById(id, function (err, user) {
+    if (err) { return cb(err); }
+    cb(null, user);
+  });
+});
+  
 //app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
@@ -63,10 +88,7 @@ app.get("/about", (req, res) => {
 app.get("/cart", (req, res) => {
   res.render("cart", {
     "cart": true,
-<<<<<<< HEAD
-=======
     user : req.user
->>>>>>> secret
   });
 });
 
