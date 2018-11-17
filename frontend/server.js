@@ -169,7 +169,6 @@ app.post('/checkout', (req, res) => {
     }).catch(err => {
       console.log(err);
     });
-    db.saveDatabase();
   });
   loadCollection('sessionCart', function (col) {
     col.chain().find({}).remove()
