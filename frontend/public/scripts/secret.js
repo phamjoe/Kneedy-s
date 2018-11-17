@@ -6,7 +6,7 @@
  */
 //Set up our array of needed keys, and variables.
 $( document ).ready(function() {
-    $('#v-pills-4-tab').hide();
+    $('#v-pills-3-tab').hide();
 
 });
 neededkeys = [38,38,40,40,37,39,37,39,66,65], started = false, count = 0;
@@ -30,7 +30,7 @@ $(document).keydown(function(e){
 		}
 		if(count == 10){
 			//We made it! Put code here to do what you want when successfully execute konami sequence
-            $('#v-pills-4-tab').show();
+            $('#v-pills-3-tab').show();
             //Reset the conditions so that someone can do it all again.
 			reset();
 		}
