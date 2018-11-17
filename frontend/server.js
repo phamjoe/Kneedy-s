@@ -172,7 +172,7 @@ app.post('/checkout', (req, res) => {
     db.saveDatabase();
   });
   loadCollection('sessionCart', function (col) {
-    col.chain().find(({})).remove()
+    col.chain().find({}).remove()
     db.saveDatabase(() => {
       res.redirect('/');
     });
