@@ -172,15 +172,13 @@ app.post('/checkout', (req, res) => {
     db.saveDatabase();
   });
   loadCollection('sessionCart', function (col) {
-    let search = 'bob';
-    console.log(search);
-    //show the users
     col.removeWhere((el) => {
       return true;
     });
-    db.saveDatabase();
+    db.saveDatabase(() => {
+      res.redirect('/');
+    });
   });
-  res.redirect('/');
 });
 
 app.get("/contact", (req, res) => {
