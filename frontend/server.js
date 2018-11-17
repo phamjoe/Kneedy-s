@@ -6,10 +6,22 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const sass = require("node-sass-middleware");
-const morgan = require('morgan');
+//const morgan = require('morgan');
 const fetch = require('node-fetch');
+var loki = require('lokijs'),
+  db = new loki('quickstart.db');
 
-app.use(morgan('dev'));
+function loadCollection(colName, callback) {
+  db.loadDatabase({}, function () {
+    var _collection = db.getCollection(colName);
+    if (!_collection) {
+      console.log("Collection %s does not exist. Creating ...", colName);
+      _collection = db.addCollection('sessionCart');
+    }
+    callback(_collection);
+  });
+}
+//app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
 
@@ -19,7 +31,7 @@ app.use(bodyParser.urlencoded({
 app.use("/styles", sass({
   src: __dirname + "/styles",
   dest: __dirname + "/public/styles",
-  debug: true,
+  debug: false,
   outputStyle: 'expanded'
 }));
 app.use(express.static("public"));
@@ -36,9 +48,32 @@ app.get("/about", (req, res) => {
 });
 app.get("/cart", (req, res) => {
   res.render("cart", {
-    "cart": true
+    "cart": true,
   });
 });
+
+app.get('/local', (req, res) => {
+  loadCollection('sessionCart', function (col) {
+    //show the users
+    res.json(col.data);
+    db.saveDatabase();
+  });
+})
+app.post('/local/delete', (req, res) => {
+  loadCollection('sessionCart', function (col) {
+    let search = req.body.search;
+    console.log(search);
+    //show the users
+    col.findAndRemove({
+      'name': {
+        '$eq': search
+      }
+    });
+    db.saveDatabase();
+  });
+  res.end();
+})
+
 app.get("/checkout", (req, res) => {
   res.render("checkout");
 });
@@ -60,7 +95,28 @@ app.get("/order", (req, res) => {
   }).catch(err => {
     console.log(err);
   });
+});
 
+app.post('/cart', (req, res) => {
+  let items = req.body.response[0];
+  console.log(items);
+  loadCollection('sessionCart', function (col) {
+    let found = false;
+    col.findAndUpdate({
+      'name': {
+        '$eq': items.name
+      }
+    }, (el) => {
+      found = true;
+      el = el.quantity++;
+    });
+    if (found === false) {
+      col.insert(items);
+    }
+    //save 
+    db.saveDatabase();
+  });
+  res.end();
 });
 
 app.listen(PORT, () => {
