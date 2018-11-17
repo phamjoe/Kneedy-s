@@ -24,8 +24,8 @@ function handleInboundSms(request, response) {
 
 module.exports = (() => {
   router.post('/', (req, res) => {
-    console.log(req.data);
     req.on('data', (e) => {
+      console.log(e);
       e = JSON.parse(e);
       e.forEach((el) => {
         console.log(el.number, el.message);
