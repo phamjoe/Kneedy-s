@@ -133,7 +133,6 @@ if (window.cart) {
 }
 
 const cartPrice = () => {
-  console.log("Hi");
   let $subtotal = $(".subtotal2");
   let $tax = $(".tax2");
   let $total = $(".total2");
