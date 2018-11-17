@@ -10,15 +10,21 @@ const fetch = require('node-fetch');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const userDB = require('./db');
+
+// Session based management
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
 }));
+// For session cookies
 app.use(require('cookie-parser')());
+
+// File system db
 var loki = require('lokijs'),
   db = new loki('quickstart.db');
 
+// Load a loki collection and return it
 function loadCollection(colName, callback) {
   db.loadDatabase({}, function () {
     var _collection = db.getCollection(colName);
@@ -29,6 +35,7 @@ function loadCollection(colName, callback) {
     callback(_collection);
   });
 }
+
 
 passport.use(new Strategy(
   function (username, password, cb) {
@@ -58,8 +65,6 @@ passport.deserializeUser(function (id, cb) {
     cb(null, user);
   });
 });
-
-//app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
 app.use(passport.initialize());
