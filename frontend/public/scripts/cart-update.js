@@ -1,4 +1,4 @@
-let globalSubtotal = 0;
+// Gets info about products in the cart
 const getProductsInfoInCart = () => {
   $.ajax({
     url: "/local",
@@ -7,6 +7,7 @@ const getProductsInfoInCart = () => {
   });
 };
 
+// Builds the page elements for the cart and sets an event listener for the removal of the cart items
 const cart = (data) => {
   buildProduct(data)
     .then(renderEls)
@@ -22,16 +23,16 @@ const cart = (data) => {
           .text()
           .trim();
         let price = p
-        .text()
-        .trim();
+          .text()
+          .trim();
         let subtotal = (($(".subtotal").text().substr(1)) - (price.substr(1))).toFixed(2);
 
         let count = $(".counter").text();
         count = parseInt(count) - 1;
         $(".counter").text(count);
         $(".subtotal").text(`$${subtotal}`);
-         $tax.text('$'+(subtotal * 0.13).toFixed(2));
-         $total.text('$'+(subtotal * 1.13).toFixed(2));
+        $tax.text('$' + (subtotal * 0.13).toFixed(2));
+        $total.text('$' + (subtotal * 1.13).toFixed(2));
         $(tr).remove();
         $.ajax({
           method: "POST",
@@ -47,6 +48,7 @@ const cart = (data) => {
     });
 }
 
+// Sets quantity of the products and sends both that and their ids 
 const actualCart = id => {
   let url = " https://kneedys-api.herokuapp.com/products/" + id;
   $.get(url).then(response => {
@@ -66,6 +68,7 @@ const actualCart = id => {
 };
 
 
+// Onclick for the add to cart button
 $(".add-cart").on("click", function () {
   let count = $(".counter").text();
   count = parseInt(count) + 1;
@@ -75,6 +78,7 @@ $(".add-cart").on("click", function () {
   actualCart(productId);
 });
 
+// Builds the html elements for the cart items
 const buildProduct = (info) => {
   let objs = [];
   let $subtotal = $(".subtotal");
@@ -104,14 +108,14 @@ const buildProduct = (info) => {
     objs.push(el);
     subtotal += element.price * priceTrim;
     $subtotal.text('$' + subtotal.toFixed(2));
-    $tax.text('$'+(subtotal * 0.13).toFixed(2));
-    $total.text('$'+(subtotal * 1.13).toFixed(2));
-    globalSubtotal = subtotal;
+    $tax.text('$' + (subtotal * 0.13).toFixed(2));
+    $total.text('$' + (subtotal * 1.13).toFixed(2));
   });
 
   return Promise.resolve(objs);
 }
 
+// Renders the cart items
 const renderEls = (els) => {
   els.forEach(el => {
     $("tbody").append(el);
@@ -122,18 +126,18 @@ $(".clear-cart").on("click", function () {
   $(".root").empty();
 });
 
+// Only gets info if this is the cart page
 if (window.cart) {
   console.log("Cart Page!");
   getProductsInfoInCart();
 }
 
 const cartPrice = () => {
-  console.log("Hi");
   let $subtotal = $(".subtotal2");
   let $tax = $(".tax2");
   let $total = $(".total2");
-  
+
   $subtotal.text('$' + globalSubtotal.toFixed(2));
-  $tax.text('$'+(subtotal * 0.13).toFixed(2));
-  $total.text('$'+(subtotal * 1.13).toFixed(2));
+  $tax.text('$' + (subtotal * 0.13).toFixed(2));
+  $total.text('$' + (subtotal * 1.13).toFixed(2));
 }

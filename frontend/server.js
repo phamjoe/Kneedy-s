@@ -6,20 +6,25 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const sass = require("node-sass-middleware");
-const morgan = require('morgan');
 const fetch = require('node-fetch');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const userDB = require('./db');
+
+// Session based management
 app.use(require('express-session')({
   secret: 'keyboard cat',
   resave: false,
   saveUninitialized: false
 }));
+// For session cookies
 app.use(require('cookie-parser')());
+
+// File system db
 var loki = require('lokijs'),
   db = new loki('quickstart.db');
 
+// Load a loki collection and return it
 function loadCollection(colName, callback) {
   db.loadDatabase({}, function () {
     var _collection = db.getCollection(colName);
@@ -30,6 +35,7 @@ function loadCollection(colName, callback) {
     callback(_collection);
   });
 }
+
 
 passport.use(new Strategy(
   function (username, password, cb) {
@@ -59,8 +65,6 @@ passport.deserializeUser(function (id, cb) {
     cb(null, user);
   });
 });
-
-//app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
 app.use(passport.initialize());
@@ -150,10 +154,8 @@ app.post('/checkout', (req, res) => {
     let order = data.reduce((acc, el) => {
       acc += 'id: ' +
         el.id + ', quantity:' + el.quantity + ' ';
-      console.log(acc);
       return acc;
     }, "");
-    console.log(order);
     const url = ' https://kneedys-api.herokuapp.com/text';
     fetch(url, {
       method: 'POST',
@@ -165,7 +167,6 @@ app.post('/checkout', (req, res) => {
         "message": req.body.fname + ', ' + req.body.lname + " Has placed order, " + order + ", Send eta:"
       }])
     }).then((response) => {
-      console.log(response);
       col.chain().find({}).remove()
       db.saveDatabase(function (err) {
         res.redirect('/order-received');
@@ -211,7 +212,6 @@ app.get("/order-received", (req, res) => {
 
 app.post('/cart', (req, res) => {
   let items = req.body.response[0];
-  console.log(items);
   loadCollection('sessionCart', function (col) {
     let found = false;
     col.findAndUpdate({

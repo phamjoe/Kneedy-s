@@ -7,12 +7,13 @@ const {
 } = require("../db/methods/user_interface.js");
 const express = require("express");
 const router = express.Router();
+// Routes for the users
 
 module.exports = (() => {
   router.get("/:id", (req, res) => {
     getInfo(req.params.id).then((resolve, reject) => {
       if (reject) throw reject;
-      res.json(resolve)
+      res.json(resolve);
     });
   });
   router.put("/:id", (req, res) => {
@@ -23,8 +24,7 @@ module.exports = (() => {
     getPast(req.params.id).then((resolve, reject) => {
       if (reject) throw reject;
       res.json(resolve);
-    })
-
+    });
   });
   return router;
 })();
