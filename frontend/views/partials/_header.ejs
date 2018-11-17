@@ -2,9 +2,14 @@
 <script>
     window.cart ="false";
     </script>
+<<<<<<< HEAD
+=======
+<script src="/scripts/cart-update.js"></script> 
+
+>>>>>>> secret
 <nav class="navbar navbar-expand-lg navbar-dark ftco_navbar bg-dark ftco-navbar-light" id="ftco-navbar">
   <div class="container">
-    <a class="navbar-brand" href="/">Kneedy's<small></small></a>
+    <a class="navbar-brand kneedy-logo" href="#">Kneedy's<small></small></a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#ftco-nav" aria-controls="ftco-nav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="oi oi-menu"></span> Menu
     </button>
@@ -15,7 +20,11 @@
         <li class="nav-item"><a href="/checkout" class="nav-link">Checkout</a></li>
         <li class="nav-item"><a href="/about" class="nav-link">About</a></li>
         <li class="nav-item"><a href="/contact" class="nav-link">Contact</a></li>
+        <% if(user){ %>
+          <li class="nav-item"><a href="/logout" class="nav-link">Logout</a></li>
+          <% } else{ %>
         <li class="nav-item"><a href="/login" class="nav-link">Login</a></li>
+        <% } %>
         <li class="nav-item cart"><a href="/cart" class="nav-link go-to-cart">
           <span class="icon icon-shopping_cart"></span>
           <span class="bag d-flex justify-content-center align-items-center">

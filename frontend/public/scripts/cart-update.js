@@ -82,8 +82,8 @@ function buildProduct(info) {
 		<td class="item-total">$${element.price * priceTrim}</td>
 		</tr>`);
         objs.push(el);
-        subtotal += element.price * priceTrim;
-        $subtotal.text(subtotal);
+        subtotal += element.quantity * priceTrim;
+        $subtotal.text(subtotal.toFixed(2));
         $tax.text((subtotal * 0.13).toFixed(2));
         $total.text((subtotal * 1.13).toFixed(2));
     });
@@ -98,6 +98,12 @@ function renderEls(els) {
 }
 
 
+
+
+function updatePrice(){
+    let $total = $('.total');
+    $total.text();
+}
 
 $('.clear-cart').on("click", function () {
     $(".root").empty();

@@ -24,7 +24,8 @@ function loadCollection(colName, callback) {
 //app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
-
+app.use(passport.initialize());
+app.use(passport.session());
 app.use(bodyParser.urlencoded({
   extended: true
 }));
@@ -37,18 +38,35 @@ app.use("/styles", sass({
 app.use(express.static("public"));
 
 // Home page
-app.get("/", (req, res) => {
-  res.render("index");
-});
-app.get("/login", (req, res) => {
-  res.render("login");
-});
+app.get('/', (req, res) => {
+    res.render('index', { user: req.user });
+  });
+
+app.get('/login',(req, res) => {
+    res.render('login',{ user: req.user });
+  });
+
+app.post('/login', 
+  passport.authenticate('local', { failureRedirect: '/login' }),(req, res) => {
+    res.redirect('/');
+  });
+
+app.get('/logout', (req, res) => {
+    req.logout();
+    res.redirect('/');
+  });
+
 app.get("/about", (req, res) => {
-  res.render("about");
+  
+  res.render("about", { user: req.user });
 });
 app.get("/cart", (req, res) => {
   res.render("cart", {
     "cart": true,
+<<<<<<< HEAD
+=======
+    user : req.user
+>>>>>>> secret
   });
 });
 
@@ -75,10 +93,10 @@ app.post('/local/delete', (req, res) => {
 })
 
 app.get("/checkout", (req, res) => {
-  res.render("checkout");
+  res.render("checkout", { user: req.user });
 });
 app.get("/contact", (req, res) => {
-  res.render("contact");
+  res.render("contact", { user: req.user });
 });
 app.get("/order", (req, res) => {
   const url = ' https://kneedys-api.herokuapp.com/products';
@@ -88,7 +106,8 @@ app.get("/order", (req, res) => {
     response.body.on('data', (e) => {
       let productDatabase = JSON.parse(e);
       let templateVars = {
-        product: productDatabase
+        product: productDatabase,
+        user : req.user
       };
       res.render("order", templateVars);
     });

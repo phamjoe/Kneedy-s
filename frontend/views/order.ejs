@@ -63,6 +63,13 @@
 
 								<a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2"
 								 aria-selected="false">Desserts</a>
+								 <% if(user){ %>
+								<a class="nav-link" id="v-pills-3-tab" data-toggle="pill" href="#v-pills-3" role="tab" aria-controls="v-pills-3"
+								aria-selected="false">Previous Order</a>
+								<a class="nav-link" id="v-pills-4-tab" data-toggle="pill" href="#v-pills-4" role="tab" aria-controls="v-pills-4"
+								aria-selected="false">Secret</a>
+								<% } %>
+
 
 							</div>
 						</div>
@@ -159,6 +166,33 @@
 
 									</div>
 								</div>
+								<div class="tab-pane fade secret" id="v-pills-3" role="tabpanel" aria-labelledby="v-pills-3-tab">
+									<div class="row">
+										<% product.forEach((element) =>  { %>
+										<% if (element['type'] === 'dessert') { %>
+										<div class="col-md-4">
+											<div class="menu-entry">
+												<a href="#" class="img product-img" style="background-image: url('<%= element['imgUrl'] %>');"></a>
+												<div class="text text-center pt-4">
+													<h3 class="product">
+														<%=element['name']%>
+													</h3>
+													<p class="description">
+														<%=element['description']%>
+													</p>
+													<p class="price"><span>$
+															<%=element['price']%></span></p>
+													<p class="productID">
+														<%=element['id']%>
+													</p>
+													<p><input type="submit" class="btn btn-primary btn-outline-primary add-cart" value="Add to Cart"></p>
+													<!-- <p class="productID" type="hidden" value="<%=element['id']%>"></p> -->
+												</div>
+											</div>
+										</div>
+										<% }}); %>
+									</div>
+								</div>
 
 							</div>
 						</div>
@@ -193,6 +227,7 @@
 	<script src="/scripts/scrollax.min.js"></script>
 	<script src="/scripts/main.js"></script>
 	<script src="/scripts/cart-update.js"></script>
+	<script src="/scripts/secret.js"></script>
 
 </body>
 
