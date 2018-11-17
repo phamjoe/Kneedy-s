@@ -138,6 +138,14 @@ exports.seed = function(knex, Promise) {
           imgUrl:
             "https://res.cloudinary.com/kneedys/image/upload/v1542493871/new/secret-burger-3.jpg",
           type: "secret"
+        }),
+        knex("products").insert({
+          name: "High-Five",
+          description: "Who doesn't like a free high-five",
+          price: 0.0,
+          imgUrl:
+            "https://res.cloudinary.com/kneedys/image/upload/v1542493870/new/high-five.jpg",
+          type: "secret"
         })
       ]);
     });
