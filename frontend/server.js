@@ -172,14 +172,13 @@ app.post('/checkout', (req, res) => {
     db.saveDatabase();
   });
   loadCollection('sessionCart', function (col) {
-    col.removeWhere((el) => {
-      return true;
-    });
+    col.chain().find(({})).remove()
     db.saveDatabase(() => {
       res.redirect('/');
     });
   });
 });
+
 
 app.get("/contact", (req, res) => {
   res.render("contact", {
