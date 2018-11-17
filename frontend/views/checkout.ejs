@@ -37,43 +37,33 @@
     <div class="container">
       <div class="row">
         <div class="col-xl-8 ftco-animate">
-          <form action="#" class="billing-form ftco-bg-dark p-3 p-md-5">
+          <form action="/checkout" method="POST" class="billing-form ftco-bg-dark p-3 p-md-5">
             <h3 class="mb-4 billing-heading">Billing Details</h3>
             <div class="row align-items-end">
               <div class="col-md-6">
                 <div class="form-group">
-                  <label for="firstname">Firt Name</label>
-                  <input type="text" class="form-control" placeholder="">
+                  <label for="firstname">First Name</label>
+                  <input type="text" name="fname" class="form-control" placeholder="" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="lastname">Last Name</label>
-                  <input type="text" class="form-control" placeholder="">
+                  <input type="text" name="lname" class="form-control" placeholder="" required>
                 </div>
               </div>
               <div class="w-100"></div>
               <div class="col-md-12">
                 <div class="form-group">
                   <label for="country">State / Country</label>
-                  <div class="select-wrap">
-                    <div class="icon"><span class="icon-arrow-down"></span></div>
-                    <select name="" id="" class="form-control">
-                      <option value="">France</option>
-                      <option value="">Italy</option>
-                      <option value="">Philippines</option>
-                      <option value="">South Korea</option>
-                      <option value="">Hongkong</option>
-                      <option value="">Japan</option>
-                    </select>
-                  </div>
+                  <input type="text" name="" id="" class="form-control" placeholder="Optional" />
                 </div>
               </div>
               <div class="w-100"></div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="streetaddress">Street Address</label>
-                  <input type="text" class="form-control" placeholder="House number and street name">
+                  <input type="text" class="form-control" placeholder="House number and street name : (Optional)">
                 </div>
               </div>
               <div class="col-md-6">
@@ -85,37 +75,37 @@
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="towncity">Town / City</label>
-                  <input type="text" class="form-control" placeholder="">
+                  <input type="text" class="form-control" placeholder=" Optional">
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="postcodezip">Postcode / ZIP *</label>
-                  <input type="text" class="form-control" placeholder="">
+                  <input type="text" class="form-control" placeholder="Optional">
                 </div>
               </div>
               <div class="w-100"></div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="phone">Phone</label>
-                  <input type="text" class="form-control" placeholder="">
+                  <input type="text" class="form-control" placeholder="" required>
                 </div>
               </div>
               <div class="col-md-6">
                 <div class="form-group">
                   <label for="emailaddress">Email Address</label>
-                  <input type="text" class="form-control" placeholder="">
+                  <input type="text" class="form-control" placeholder="Optional">
                 </div>
               </div>
               <div class="w-100"></div>
               <div class="col-md-12">
                 <div class="form-group mt-4">
                   <div class="radio">
-                    <label class="mr-3"><input type="radio" name="optradio"> Login? </label>
                     <label><input type="radio" name="optradio"> Checkout as Guest</label>
                   </div>
                 </div>
               </div>
+              <button class="btn btn-primary py-3 px-4" type="submit">Submit</button>
             </div>
           </form><!-- END -->
         </div> <!-- .col-md-8 -->
@@ -197,7 +187,7 @@
   <script src="/scripts/jquery.animateNumber.min.js"></script>
   <script src="/scripts/scrollax.min.js"></script>
   <script src="/scripts/main.js"></script>
-  <script src="/script/cart-update.js"></script>
+  <script src="/scripts/cart-update.js"></script>
 
 </body>
 

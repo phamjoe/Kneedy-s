@@ -142,6 +142,37 @@ app.get("/checkout", (req, res) => {
     checkout: true
   });
 });
+
+app.post('/checkout', (req, res) => {
+  let order;
+  loadCollection('sessionCart', function (col) {
+    //show the users
+    let data = col.data;
+    order = data.reduce((acc, el) => {
+      acc += 'id: ' +
+        el.id + ', quantity:' + el.quantity + ' ';
+      console.log(acc);
+      return acc;
+    }, "");
+    const url = ' https://kneedys-api.herokuapp.com/text';
+    fetch(url, {
+      method: 'POST',
+      body: JSON.stringify([{
+        "number": "2267007741",
+        "message": "Youve placed an order, please wait, the restaurant will send you the eta."
+      }, {
+        "number": "4165222220",
+        "message": req.body.fname + ', ' + req.body.lname + " Has placed order, " + order + ", Send eta:"
+      }])
+    }).then((response) => {}).catch(err => {
+      console.log(err);
+    });
+    db.saveDatabase();
+  });
+
+  res.redirect('/');
+});
+
 app.get("/contact", (req, res) => {
   res.render("contact", {
     user: req.user
