@@ -11,7 +11,11 @@ const fetch = require('node-fetch');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
 const userDB = require('./db');
-app.use(require('express-session')({ secret: 'keyboard cat', resave: false, saveUninitialized: false }));
+app.use(require('express-session')({
+  secret: 'keyboard cat',
+  resave: false,
+  saveUninitialized: false
+}));
 app.use(require('cookie-parser')());
 var loki = require('lokijs'),
   db = new loki('quickstart.db');
@@ -28,26 +32,34 @@ function loadCollection(colName, callback) {
 }
 
 passport.use(new Strategy(
-  function(username, password, cb) {
-    userDB.users.findByUsername(username, function(err, user) {
-      if (err) { return cb(err); }
-      if (!user) { return cb(null, false); }
-      if (user.password != password) { return cb(null, false); }
+  function (username, password, cb) {
+    userDB.users.findByUsername(username, function (err, user) {
+      if (err) {
+        return cb(err);
+      }
+      if (!user) {
+        return cb(null, false);
+      }
+      if (user.password != password) {
+        return cb(null, false);
+      }
       return cb(null, user);
     });
   }));
 
-passport.serializeUser(function(user, cb) {
+passport.serializeUser(function (user, cb) {
   cb(null, user.id);
 });
 
-passport.deserializeUser(function(id, cb) {
+passport.deserializeUser(function (id, cb) {
   userDB.users.findById(id, function (err, user) {
-    if (err) { return cb(err); }
+    if (err) {
+      return cb(err);
+    }
     cb(null, user);
   });
 });
-  
+
 //app.use(morgan('dev'));
 
 app.set('view engine', 'ejs');
@@ -66,31 +78,39 @@ app.use(express.static("public"));
 
 // Home page
 app.get('/', (req, res) => {
-    res.render('index', { user: req.user });
+  res.render('index', {
+    user: req.user
   });
+});
 
-app.get('/login',(req, res) => {
-    res.render('login',{ user: req.user });
+app.get('/login', (req, res) => {
+  res.render('login', {
+    user: req.user
   });
+});
 
-app.post('/login', 
-  passport.authenticate('local', { failureRedirect: '/login' }),(req, res) => {
+app.post('/login',
+  passport.authenticate('local', {
+    failureRedirect: '/login'
+  }), (req, res) => {
     res.redirect('/');
   });
 
 app.get('/logout', (req, res) => {
-    req.logout();
-    res.redirect('/');
-  });
+  req.logout();
+  res.redirect('/');
+});
 
 app.get("/about", (req, res) => {
-  
-  res.render("about", { user: req.user });
+
+  res.render("about", {
+    user: req.user
+  });
 });
 app.get("/cart", (req, res) => {
   res.render("cart", {
     "cart": true,
-    user : req.user
+    user: req.user
   });
 });
 
@@ -117,10 +137,15 @@ app.post('/local/delete', (req, res) => {
 })
 
 app.get("/checkout", (req, res) => {
-  res.render("checkout", { user: req.user });
+  res.render("checkout", {
+    user: req.user,
+    checkout: true
+  });
 });
 app.get("/contact", (req, res) => {
-  res.render("contact", { user: req.user });
+  res.render("contact", {
+    user: req.user
+  });
 });
 app.get("/order", (req, res) => {
   const url = ' https://kneedys-api.herokuapp.com/products';
@@ -131,7 +156,7 @@ app.get("/order", (req, res) => {
       let productDatabase = JSON.parse(e);
       let templateVars = {
         product: productDatabase,
-        user : req.user
+        user: req.user
       };
       res.render("order", templateVars);
     });

@@ -109,11 +109,6 @@ const renderEls = (els) => {
   });
 }
 
-const updatePrice = () => {
-  let $total = $(".total");
-  $total.text();
-}
-
 $(".clear-cart").on("click", function () {
   $(".root").empty();
   window.localStorage.clear();
@@ -122,4 +117,8 @@ $(".clear-cart").on("click", function () {
 if (window.cart) {
   console.log("Cart Page!");
   getProductsInfoInCart();
+}
+
+if (window.checkout) {
+
 }
