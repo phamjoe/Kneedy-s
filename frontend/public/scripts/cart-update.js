@@ -1,4 +1,4 @@
-let getProductsInfoInCart = () => {
+const getProductsInfoInCart = () => {
   $.ajax({
     url: "/local",
     success: cart,
@@ -6,11 +6,11 @@ let getProductsInfoInCart = () => {
   });
 };
 
-function cart(data) {
+const cart = (data) => {
   buildProduct(data)
     .then(renderEls)
     .then(() => {
-      $(".product-remove").on("click", function() {
+      $(".product-remove").on("click", function () {
         let tr = $(this).closest("tr");
         let c = tr.children(".product-name");
         let val = c
@@ -54,25 +54,8 @@ const actualCart = id => {
   return Promise.resolve("");
 };
 
-const actualCart = id => {
-  let url = " https://kneedys-api.herokuapp.com/products/" + id;
-  $.get(url).then(response => {
-    response[0].quantity = 1;
-    $.ajax({
-      type: "POST",
-      url: "/cart",
-      data: {
-        response
-      },
-      success: res => {
-        console.log(res);
-      }
-    });
-  });
-  return Promise.resolve("");
-};
 
-$(".add-cart").on("click", function() {
+$(".add-cart").on("click", function () {
   let count = $(".counter").text();
   count = parseInt(count) + 1;
   $(".counter").text(count);
@@ -81,7 +64,7 @@ $(".add-cart").on("click", function() {
   actualCart(productId);
 });
 
-function buildProduct(info) {
+const buildProduct = (info) => {
   let objs = [];
   let $subtotal = $(".subtotal");
   let $tax = $(".tax");
@@ -120,18 +103,18 @@ function buildProduct(info) {
   return Promise.resolve(objs);
 }
 
-function renderEls(els) {
+const renderEls = (els) => {
   els.forEach(el => {
     $("tbody").append(el);
   });
 }
 
-function updatePrice() {
+const updatePrice = () => {
   let $total = $(".total");
   $total.text();
 }
 
-$(".clear-cart").on("click", function() {
+$(".clear-cart").on("click", function () {
   $(".root").empty();
   window.localStorage.clear();
 });
