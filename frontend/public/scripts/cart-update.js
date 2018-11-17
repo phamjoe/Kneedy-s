@@ -1,3 +1,4 @@
+let globalSubtotal = 0;
 const getProductsInfoInCart = () => {
   $.ajax({
     url: "/local",
@@ -105,6 +106,7 @@ const buildProduct = (info) => {
     $subtotal.text('$' + subtotal.toFixed(2));
     $tax.text('$'+(subtotal * 0.13).toFixed(2));
     $total.text('$'+(subtotal * 1.13).toFixed(2));
+    globalSubtotal = subtotal;
   });
 
   return Promise.resolve(objs);
@@ -125,6 +127,13 @@ if (window.cart) {
   getProductsInfoInCart();
 }
 
-if (window.checkout) {
-
+const cartPrice = () => {
+  console.log("Hi");
+  let $subtotal = $(".subtotal2");
+  let $tax = $(".tax2");
+  let $total = $(".total2");
+  
+  $subtotal.text('$' + globalSubtotal.toFixed(2));
+  $tax.text('$'+(subtotal * 0.13).toFixed(2));
+  $total.text('$'+(subtotal * 1.13).toFixed(2));
 }
