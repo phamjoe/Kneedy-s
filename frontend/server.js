@@ -166,16 +166,15 @@ app.post('/checkout', (req, res) => {
       }])
     }).then((response) => {
       console.log(response);
+      col.chain().find({}).remove()
+      db.saveDatabase(function (err) {
+        res.redirect('/');
+      });
     }).catch(err => {
       console.log(err);
     });
   });
-  loadCollection('sessionCart', function (col) {
-    col.chain().find({}).remove()
-    db.saveDatabase(function (err) {
-      res.redirect('/');
-    });
-  });
+
 });
 
 
