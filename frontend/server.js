@@ -165,6 +165,14 @@ app.get("/order", (req, res) => {
   });
 });
 
+app.get("/order-received", (req, res) => {
+  res.render("order-received", {
+    user: req.user,
+  });
+});
+
+
+
 app.post('/cart', (req, res) => {
   let items = req.body.response[0];
   console.log(items);
