@@ -144,11 +144,11 @@ app.get("/checkout", (req, res) => {
 });
 
 app.post('/checkout', (req, res) => {
-  let order;
+
   loadCollection('sessionCart', function (col) {
     //show the users
     let data = col.data;
-    order = data.reduce((acc, el) => {
+    let order = data.reduce((acc, el) => {
       acc += 'id: ' +
         el.id + ', quantity:' + el.quantity + ' ';
       console.log(acc);
@@ -166,6 +166,17 @@ app.post('/checkout', (req, res) => {
       }])
     }).then((response) => {}).catch(err => {
       console.log(err);
+    });
+    db.saveDatabase();
+  });
+  loadCollection('sessionCart', function (col) {
+    let search = 'bob';
+    console.log(search);
+    //show the users
+    col.findAndRemove({
+      'name': {
+        '$ne': search
+      }
     });
     db.saveDatabase();
   });
