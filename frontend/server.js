@@ -166,7 +166,7 @@ app.post('/checkout', (req, res) => {
     }).then((response) => {
       col.findAndRemove({
         'name': {
-          '$ne': search
+          '$ne': "bob"
         }
       });
     }).catch(err => {
