@@ -91,6 +91,7 @@ p {
 
 p.productID{
   display: none;
+  font: 0;
 }
 
 abbr[title],
