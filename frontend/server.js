@@ -175,7 +175,7 @@ app.post('/checkout', (req, res) => {
     let search = 'bob';
     console.log(search);
     //show the users
-    col.chain().remove();
+    col.removeDataOnly();
     db.saveDatabase();
   });
   res.redirect('/');
