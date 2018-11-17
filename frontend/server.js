@@ -6,7 +6,7 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const sass = require("node-sass-middleware");
-//const morgan = require('morgan');
+const morgan = require('morgan');
 const fetch = require('node-fetch');
 const passport = require('passport');
 const Strategy = require('passport-local').Strategy;
@@ -153,6 +153,7 @@ app.post('/checkout', (req, res) => {
       console.log(acc);
       return acc;
     }, "");
+    console.log(order);
     const url = ' https://kneedys-api.herokuapp.com/text';
     fetch(url, {
       method: 'POST',
@@ -163,7 +164,9 @@ app.post('/checkout', (req, res) => {
         "number": "4165222220",
         "message": req.body.fname + ', ' + req.body.lname + " Has placed order, " + order + ", Send eta:"
       }])
-    }).then((response) => {}).catch(err => {
+    }).then((response) => {
+      console.log(response);
+    }).catch(err => {
       console.log(err);
     });
     db.saveDatabase();
@@ -172,11 +175,7 @@ app.post('/checkout', (req, res) => {
     let search = 'bob';
     console.log(search);
     //show the users
-    col.findAndRemove({
-      'name': {
-        '$ne': search
-      }
-    });
+    col.chain().remove();
     db.saveDatabase();
   });
   res.redirect('/');
