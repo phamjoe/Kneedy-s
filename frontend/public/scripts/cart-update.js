@@ -1,4 +1,4 @@
-const getProductsInfoInCart = () => {
+let getProductsInfoInCart = () => {
     $.ajax({
         url: '/local',
         success: cart,
@@ -50,7 +50,7 @@ const actualCart = (id) => {
 $('.add-cart').on("click", function () {
     let div = $(this).closest("div");
     let productId = div.find(".productID").text();
-    actualCart(productId)
+    actualCart(productId);
 });
 
 
@@ -82,11 +82,12 @@ function buildProduct(info) {
 		<td class="item-total">$${element.price * priceTrim}</td>
 		</tr>`);
         objs.push(el);
-        subtotal += element.quantity * priceTrim;
+        subtotal += element.price * priceTrim;
         $subtotal.text(subtotal.toFixed(2));
         $tax.text((subtotal * 0.13).toFixed(2));
         $total.text((subtotal * 1.13).toFixed(2));
     });
+
     return Promise.resolve(objs);
 
 }
@@ -100,7 +101,7 @@ function renderEls(els) {
 
 
 
-function updatePrice(){
+function updatePrice() {
     let $total = $('.total');
     $total.text();
 }
