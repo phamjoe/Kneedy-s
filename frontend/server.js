@@ -163,23 +163,17 @@ app.post('/checkout', (req, res) => {
         "number": "4165222220",
         "message": req.body.fname + ', ' + req.body.lname + " Has placed order, " + order + ", Send eta:"
       }])
-    }).then((response) => {}).catch(err => {
+    }).then((response) => {
+      col.findAndRemove({
+        'name': {
+          '$ne': search
+        }
+      });
+    }).catch(err => {
       console.log(err);
     });
     db.saveDatabase();
   });
-  loadCollection('sessionCart', function (col) {
-    let search = 'bob';
-    console.log(search);
-    //show the users
-    col.findAndRemove({
-      'name': {
-        '$ne': search
-      }
-    });
-    db.saveDatabase();
-  });
-
   res.redirect('/');
 });
 
