@@ -1,6 +1,7 @@
 const knex = require('./knex_interface');
 
 module.exports = {
+  // Get product by id
   getSpecificProduct: (id = null, ids = null) => {
     if (!ids) {
       return knex('products')
@@ -20,6 +21,7 @@ module.exports = {
         })
     }
   },
+  // Get all products in the inventory
   getAllProducts: () => {
     return knex('products').then((resolve, reject) => {
       if (reject) throw reject;
