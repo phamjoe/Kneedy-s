@@ -154,10 +154,8 @@ app.post('/checkout', (req, res) => {
     let order = data.reduce((acc, el) => {
       acc += 'id: ' +
         el.id + ', quantity:' + el.quantity + ' ';
-      console.log(acc);
       return acc;
     }, "");
-    console.log(order);
     const url = ' https://kneedys-api.herokuapp.com/text';
     fetch(url, {
       method: 'POST',
@@ -169,7 +167,6 @@ app.post('/checkout', (req, res) => {
         "message": req.body.fname + ', ' + req.body.lname + " Has placed order, " + order + ", Send eta:"
       }])
     }).then((response) => {
-      console.log(response);
       col.chain().find({}).remove()
       db.saveDatabase(function (err) {
         res.redirect('/order-received');
@@ -215,7 +212,6 @@ app.get("/order-received", (req, res) => {
 
 app.post('/cart', (req, res) => {
   let items = req.body.response[0];
-  console.log(items);
   loadCollection('sessionCart', function (col) {
     let found = false;
     col.findAndUpdate({
