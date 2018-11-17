@@ -168,7 +168,7 @@ app.post('/checkout', (req, res) => {
       console.log(response);
       col.chain().find({}).remove()
       db.saveDatabase(function (err) {
-        res.redirect('/');
+        res.redirect('/order-received');
       });
     }).catch(err => {
       console.log(err);
