@@ -106,6 +106,7 @@ const buildProduct = (info) => {
 		    <td class="item-total">$${(element.price * priceTrim).toFixed(2)}</td>
 		</tr>`);
     objs.push(el);
+    cartNumber(element.quantity);
     subtotal += element.price * priceTrim;
     $subtotal.text('$' + subtotal.toFixed(2));
     $tax.text('$' + (subtotal * 0.13).toFixed(2));
@@ -140,4 +141,9 @@ const cartPrice = () => {
   $subtotal.text('$' + globalSubtotal.toFixed(2));
   $tax.text('$' + (subtotal * 0.13).toFixed(2));
   $total.text('$' + (subtotal * 1.13).toFixed(2));
+}
+const cartNumber = (quantity) => {
+  let count = $(".counter").text();
+  count = parseInt(count) + quantity;
+  $(".counter").text(count);
 }
