@@ -23,12 +23,12 @@
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
--DB_HOST=
--DB_USER=
--DB_PASS=
--DB_NAME=
--DB_SSL=
--DB_PORT=
+- DB_HOST=
+- DB_USER=
+- DB_PASS=
+- DB_NAME=
+- DB_SSL=
+- DB_PORT=
 
 3. Install dependencies: `npm i`
 4. Run the server: `node server.js`
