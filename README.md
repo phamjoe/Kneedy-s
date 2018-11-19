@@ -2,18 +2,6 @@
 
 ###### and maybe croissants ;)
 
-## Project Setup
-
-1. Create your own empty repo on GitHub
-2. Clone this repository (do not fork)
-
-- Suggestion: When cloning, specify a different folder name that is relevant to your project
-
-3. Remove the git remote: `git remote rm origin`
-4. Add a remote for your origin: `git remote add origin <your github repo URL>`
-5. Push to the new origin: `git push -u origin master`
-6. Verify that the skeleton code now shows up in your repo on GitHub
-
 ## Getting Started
 
 #### Cd into the server folder and do the following
@@ -35,6 +23,13 @@
 
 1. Create the `.env` by using `.env.example` as a reference: `cp .env.example .env`
 2. Update the .env file with your correct local information
+-DB_HOST=
+-DB_USER=
+-DB_PASS=
+-DB_NAME=
+-DB_SSL=
+-DB_PORT=
+
 3. Install dependencies: `npm i`
 4. Run the server: `node server.js`
 5. Visit `http://localhost:4040/`
