@@ -38,7 +38,9 @@
 3. Install dependencies: `npm i`
 4. Run the server: `node server.js`
 5. Visit `http://localhost:4040/`
-6. Enjoy!
+6. You can use our example account to login.
+- Username: 123@example.com Password: 123
+7. Enjoy!
 
 ## Dependencies
 
