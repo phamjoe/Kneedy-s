@@ -2,6 +2,9 @@
 
 ###### and maybe croissants ;)
 
+## Live demo
+http://kneedys-frontend.herokuapp.com/
+
 ## Getting Started
 
 #### Cd into the server folder and do the following
